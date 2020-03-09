@@ -10,7 +10,7 @@ import MessageSender from './MessageSender';
 class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {threadIDOfMessageList: null};
+        this.state = {currentThreadID: null, currentThreadName: ""};
 
         this.userName = window.localStorage.getItem("userName");
         this.userID = window.localStorage.getItem("userID");
@@ -31,8 +31,8 @@ class Main extends React.Component {
                 </div>
                 <div className="col-md-8">
                     <div className="vh-100">
-                        <MessageListHeader/>
-                        <MessageList threadID={this.state.threadIDOfMessageList} messageListType="SIGNED_IN_USER"/>
+                        <MessageListHeader threadName={this.state.currentThreadName}/>
+                        <MessageList threadID={this.state.currentThreadID} messageListType="SIGNED_IN_USER"/>
                         <MessageSender/>
                     </div>
                 </div>
@@ -40,8 +40,8 @@ class Main extends React.Component {
         );
     }
 
-    loadThreadIntoMessageViewer(threadID) {
-        this.setState({threadIDOfMessageList: threadID});
+    loadThreadIntoMessageViewer(threadID, threadName) {
+        this.setState({currentThreadID: threadID, currentThreadName: threadName});
     }
 }
 

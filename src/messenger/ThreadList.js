@@ -27,7 +27,7 @@ class ThreadList extends React.Component {
         console.log("state", this.state);
         for(let i = 0; i < this.state.threads.length; i++) {
             const thread = this.state.threads[i];
-            const threadUI = <Thread key={thread.id} threadID={thread.id} title={thread.name} lastMsg={thread.lastMessage} lastActive={time.millisToTime(thread.lastActiveAt)} loadThreadIntoMessageViewer={this.props.loadThreadIntoMessageViewer}/>
+            const threadUI = <Thread key={thread.id} threadID={thread.id} threadName={thread.name} lastMsg={thread.lastMessage} lastActive={time.millisToTime(thread.lastActiveAt)} loadThreadIntoMessageViewer={this.props.loadThreadIntoMessageViewer}/>
             threadUIs.push(threadUI);
         }
         return (

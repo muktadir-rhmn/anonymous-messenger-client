@@ -5,7 +5,7 @@ class MessageViewerHeader extends React.Component {
     render() {
         return (
             <div>
-                <h1>Selected Thread Name</h1>
+                <h1>{this.props.threadName}</h1>
             </div>
         );
     }
