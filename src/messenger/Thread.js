@@ -24,7 +24,7 @@ class Thread extends React.Component {
         const threadID = parseInt(this.props.threadID);
 
         this.loadThread(threadID);
-
+        this.updateActiveHighlighting();
         event.stopPropagation();
     }
 
