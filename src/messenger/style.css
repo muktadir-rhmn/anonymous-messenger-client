@@ -1,0 +1,45 @@
+
+
+#thread-list {
+    height: 80%;
+    overflow: auto;
+}
+
+#newThreadURL {
+    text-align: center;
+}
+
+#messageList {
+    height: 75%;
+    overflow: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px 10px 0px 0px;
+    margin-bottom: 5px;
+}
+
+.sent-message {
+    margin: 10px 0px 10px 50%;
+}
+
+.sent-message .message-body {
+    background-color: #6ef3d6;
+    color: black;
+    border-radius: 20px 20px 0px 20px;
+    padding: 10px;
+}
+
+.received-message {
+    margin: 10px 50% 10px 0px;
+}
+
+.received-message .message-body{
+    padding: 10px;
+    background-color: #c6fce5;
+    color: black;
+    border-radius: 20px 20px 20px 0px;
+}
+
+textarea {
+    resize: none;
+}
