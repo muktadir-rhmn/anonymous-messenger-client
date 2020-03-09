@@ -1,4 +1,7 @@
 import React from 'react';
+
+import requester from '../library/requester';
+
 import './style.css';
 
 class MessageSender extends React.Component {
@@ -30,8 +33,18 @@ class MessageSender extends React.Component {
     }
 
     sendMessage(message) {
-        console.log(message);
-        
+        console.log("Sending message:", message);
+
+        const currentThreadID = this.props.currentThreadID;
+        const path = `/threads/${currentThreadID}/new-message`;
+        requester.POST(path, {text: message}).then(
+            (response) => {
+                console.log(response.message);
+            }, 
+            (error) => {
+                console.error("Error sending message");
+            }
+        )
     }
 }
 
