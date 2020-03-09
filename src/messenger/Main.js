@@ -12,6 +12,10 @@ class Main extends React.Component {
         super(props);
         this.state = {threadIDOfMessageList: null};
 
+        this.userName = window.localStorage.getItem("userName");
+        this.userID = window.localStorage.getItem("userID");
+        this.initiationURL = `http://localhost:3000.com/initiate/${this.userID}`;
+
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
     }
 
@@ -20,8 +24,8 @@ class Main extends React.Component {
             <div id="messenger-main" className="row">
                 <div className="col-md-3">
                     <div className="vh-100">
-                        <h1>Muktadir</h1>
-                        <p id="newThreadURL">http://test.com/muktadir <IoIosCopy/></p>
+                        <h1>{this.userName}</h1>
+                        <p id="newThreadURL"> <a href={this.initiationURL}>{this.initiationURL}</a> <IoIosCopy/></p>
                         <ThreadList loadThreadIntoMessageViewer={this.loadThreadIntoMessageViewer}/>
                     </div>
                 </div>

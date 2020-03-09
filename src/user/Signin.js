@@ -31,6 +31,8 @@ class Signin extends React.Component {
         requester.POST("/signin", data).then(
             (response) => {
                 window.localStorage.setItem("token", response.token);
+                window.localStorage.setItem("userID", response.userID);
+                window.localStorage.setItem("userName", response.userName);
                 alert(response.message); 
             },
             (data) => {alert(data.message);}
