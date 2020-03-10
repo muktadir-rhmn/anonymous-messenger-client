@@ -5,12 +5,6 @@ import SentMessage from './SentMessage';
 import eventManager from '../library/eventManager';
 
 class MessageList extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.handleNewMessage = this.handleNewMessage.bind(this);
-        eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
-    }
 
     render() {
         console.log("rendering MessageList. props:", this.props);
@@ -28,8 +22,6 @@ class MessageList extends React.Component {
             </div>
         );
     }
-
-    
 
     getMessageUI(message){
         let messageType;
@@ -68,16 +60,7 @@ class MessageList extends React.Component {
         msgViewer.scrollTop = msgViewer.scrollHeight;
     }
     
-    handleNewMessage(eventData) {
-        const messages = eventData.messages;
-        console.log("new messages:", messages);
-        if(messages.length > 0) eventManager.setLastMessageID(messages[messages.length - 1].id);
-        for(let i = 0; i < messages.length; i++) {
-            if(messages[i].threadID !== this.props.threadID) continue;
-            this.props.messages.push(messages[i]);
-        }
-        this.setState({});
-    }
+    
 }
 
 export default MessageList;

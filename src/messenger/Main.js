@@ -19,6 +19,8 @@ class Main extends React.Component {
         this.initiationURL = `http://localhost:3000.com/initiate/${this.userID}`;
 
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
+        this.handleNewMessage = this.handleNewMessage.bind(this);
+        eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
 
         requester.GET("/threads").then(
             (response) => {
@@ -79,6 +81,17 @@ class Main extends React.Component {
 
     loadThreadIntoMessageViewer(threadID, threadName) {
         this.fetchMessages(threadID, threadName);
+    }
+    
+    handleNewMessage(eventData) {
+        const messages = eventData.messages;
+        console.log("new messages:", messages);
+        if(messages.length > 0) eventManager.setLastMessageID(messages[messages.length - 1].id);
+        for(let i = 0; i < messages.length; i++) {
+            if(messages[i].threadID !== this.state.currentThreadID) continue;
+            this.state.messages.push(messages[i]);
+        }
+        this.setState({});
     }
 }
 

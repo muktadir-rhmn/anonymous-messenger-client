@@ -97,12 +97,11 @@ class EventManager {
     handleNewEvent(event) {
         const handlers = this.eventListeners[event.eventType];
 
-        let maxEventTime = -1;
+        if(this.lastEventTime < event.createdAt) this.lastEventTime = event.createdAt; 
+        
         for(let i = 0; i < handlers.length; i++) {
-            if(maxEventTime < event.createdAt) maxEventTime = event.createdAt; 
             handlers[i](event.data);
         }
-        this.lastEventTime = maxEventTime;
     }
 }
 
