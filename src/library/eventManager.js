@@ -96,6 +96,7 @@ const eventManager = new EventManager();
 eventManager.setPullManager(pullManager);
 pullManager.setEventManager(eventManager);
 
-pullManager.pull(); //start pulling
+const path = window.location.pathname;
+if(path === "/" || path.indexOf("/initiator-message/") !== -1) pullManager.pull(); //start pulling
 
 export default eventManager;

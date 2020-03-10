@@ -74,7 +74,7 @@ class MessageList extends React.Component {
 
         let messageUI;
         if(messageType === MESSAGE_TYPE_SENT) messageUI = <SentMessage key={message.id} id={message.id} status={message.status} text={message.text} seenAt={message.seenAt} sentAt={message.sentAt}/>
-        else if(messageType === MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.seenAt} />
+        else if(messageType === MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.sentAt} />
         return messageUI;
     }
 

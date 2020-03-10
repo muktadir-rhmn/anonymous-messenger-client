@@ -1,22 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import './style.css';
-import MessageListHeader from './MessageListHeader';
 import MessageList from './MessageList';
 import MessageSender from './MessageSender';
 
-class InitiatorMain extends React.Component {
-    render() {
-        return (
-            <div id="initiator-main" className="row">
-                <div className="vh-100">
-                    <MessageListHeader/>
-                    <MessageList/>
-                    <MessageSender/>
-                </div>
+function InitiatorMain (props){
+    let {threadID} = useParams();
+    return (
+        <div id="initiator-main" className="row">
+            <div className="vh-100">
+                <MessageList threadID={threadID} messageListType="INITIATOR"/>
+                <MessageSender currentThreadID={threadID}/>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default InitiatorMain;
