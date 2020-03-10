@@ -17,7 +17,7 @@ class PullManager {
                 {
                     eventType: this.eventManager.eventTypes.NEW_MESSAGE,
                     data: {
-                        lastMessageID: 7,
+                        lastMessageID: this.eventManager.lastMessageID,
                     }
                 },
             ]
@@ -63,10 +63,26 @@ class EventManager {
         }
 
         this.lastEventTime = new Date().valueOf();
+        this.lastMessageID = null;
     }
 
     setPullManager(pullManager){
         this.pullManager = pullManager;
+    }
+
+    setLastMessageID(id) {
+        console.log("Setting last message id:", id);
+        let isFirstTime = false;
+        if(this.lastMessageID === null) isFirstTime = true;
+
+        this.lastMessageID = id;
+
+        const path = window.location.pathname;
+        if(isFirstTime){//start pulling
+            if(path === "/" || path.indexOf("/initiator-message/") !== -1) {
+                pullManager.pull(); 
+            }
+        }
     }
 
     /**
@@ -95,8 +111,5 @@ const eventManager = new EventManager();
 
 eventManager.setPullManager(pullManager);
 pullManager.setEventManager(eventManager);
-
-const path = window.location.pathname;
-if(path === "/" || path.indexOf("/initiator-message/") !== -1) pullManager.pull(); //start pulling
 
 export default eventManager;

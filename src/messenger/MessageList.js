@@ -2,16 +2,11 @@ import React from 'react';
 import './style.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-import requester from '../library/requester';
 import eventManager from '../library/eventManager';
 
 class MessageList extends React.Component {
     constructor(props) {
         super(props);
-
-        this.sentRequest = false;
-
-        this.state = {messages: []};
 
         this.handleNewMessage = this.handleNewMessage.bind(this);
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
@@ -19,13 +14,10 @@ class MessageList extends React.Component {
 
     render() {
         console.log("rendering MessageList. props:", this.props);
-        
-        if(!this.sentRequest) this.fetchMessages();
-        else this.sentRequest = false;
 
         const messagesUIs = [];
-        for(let i = 0; i < this.state.messages.length; i++) {
-            const message = this.state.messages[i];
+        for(let i = 0; i < this.props.messages.length; i++) {
+            const message = this.props.messages[i];
             
             let messageUI = this.getMessageUI(message);
             messagesUIs.push(messageUI);
@@ -37,24 +29,9 @@ class MessageList extends React.Component {
         );
     }
 
-    fetchMessages() {
-        console.log("fetching messages of threadID", this.props.threadID);
-        if(this.props.threadID === null) return;
-
-        this.sentRequest = true;
-        const path = `/threads/${this.props.threadID}`;
-        requester.GET(path, {}).then(
-            (response) =>  {
-                this.setState({messages: response.messages});
-            }, 
-            (error) => {
-                console.error("Error fetching messages");
-            }
-        )
-    }
+    
 
     getMessageUI(message){
-        
         let messageType;
         const SIGNED_IN_USER = 0;
         const INITIATOR = 1;
@@ -93,9 +70,11 @@ class MessageList extends React.Component {
     
     handleNewMessage(eventData) {
         const messages = eventData.messages;
+        console.log("new messages:", messages);
+        if(messages.length > 0) eventManager.setLastMessageID(messages[messages.length - 1].id);
         for(let i = 0; i < messages.length; i++) {
             if(messages[i].threadID !== this.props.threadID) continue;
-            this.state.messages.push(messages[i]);
+            this.props.messages.push(messages[i]);
         }
         this.setState({});
     }

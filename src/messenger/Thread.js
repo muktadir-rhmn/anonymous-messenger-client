@@ -10,7 +10,7 @@ class Thread extends React.Component {
 
     render() {
         return (
-            <div id={"threadListItem-" + this.props.threadID} onClick={this.handleClickOnListItem}  className="thread-list-item list-group-item list-group-item-action">
+            <div id={"threadListItem-" + this.props.threadID} onClick={this.handleClickOnListItem}  className={`thread-list-item list-group-item list-group-item-action ${this.props.isActive ? "active": ""}`}>
                 <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">{this.props.threadName}</h5>
                 <small>{this.props.lastActive}</small>
@@ -25,22 +25,13 @@ class Thread extends React.Component {
         const threadName = this.props.threadName;
 
         this.loadThread(threadID, threadName);
-        this.updateActiveHighlighting();
         event.stopPropagation();
     }
 
     loadThread(threadID, threadName) {
         console.log("Showing thread", threadID, threadName);
         
-        this.props.loadThreadIntoMessageViewer(threadID, threadName)
-    }
-    
-    updateActiveHighlighting() {
-        const threadListItems = document.querySelectorAll(".thread-list-item");
-        for(let i = 0; i < threadListItems.length; i++) {
-            threadListItems[i].classList.remove("active");
-        }
-        document.getElementById(`threadListItem-${this.props.threadID}`).classList.add("active");
+        this.props.loadThreadIntoMessageViewer(threadID, threadName);
     }
 
 }
