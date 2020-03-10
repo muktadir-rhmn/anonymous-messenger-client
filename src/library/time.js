@@ -1,6 +1,6 @@
 const time = {
     millisToTime: function(millis) {
-        return millis;
+        return new Date(parseInt(millis)).toUTCString();
     }
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-import eventManager from '../library/eventManager';
+import time from '../library/time';
 
 class MessageList extends React.Component {
 
@@ -42,8 +42,8 @@ class MessageList extends React.Component {
         }
 
         let messageUI;
-        if(messageType === MESSAGE_TYPE_SENT) messageUI = <SentMessage key={message.id} id={message.id} status={message.status} text={message.text} seenAt={message.seenAt} sentAt={message.sentAt}/>
-        else if(messageType === MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.sentAt} />
+        if(messageType === MESSAGE_TYPE_SENT) messageUI = <SentMessage key={message.id} id={message.id} status={message.status} text={message.text} seenAt={time.millisToTime(message.seenAt)} sentAt={time.millisToTime(message.sentAt)}/>
+        else if(messageType === MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={time.millisToTime(message.sentAt)} />
         return messageUI;
     }
 
