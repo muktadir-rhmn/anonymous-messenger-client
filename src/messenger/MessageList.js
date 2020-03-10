@@ -3,6 +3,7 @@ import './style.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
 import requester from '../library/requester';
+import eventManager from '../library/eventManager';
 
 class MessageList extends React.Component {
     constructor(props) {
@@ -11,6 +12,9 @@ class MessageList extends React.Component {
         this.sentRequest = false;
 
         this.state = {messages: []};
+
+        this.handleNewMessage = this.handleNewMessage.bind(this);
+        eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
     }
 
     render() {
@@ -70,7 +74,7 @@ class MessageList extends React.Component {
 
         let messageUI;
         if(messageType === MESSAGE_TYPE_SENT) messageUI = <SentMessage key={message.id} id={message.id} status={message.status} text={message.text} seenAt={message.seenAt} sentAt={message.sentAt}/>
-        else if(messageType == MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.seenAt} />
+        else if(messageType === MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.seenAt} />
         return messageUI;
     }
 
@@ -87,6 +91,14 @@ class MessageList extends React.Component {
         msgViewer.scrollTop = msgViewer.scrollHeight;
     }
     
+    handleNewMessage(eventData) {
+        const messages = eventData.messages;
+        for(let i = 0; i < messages.length; i++) {
+            if(messages[i].threadID !== this.props.threadID) continue;
+            this.state.messages.push(messages[i]);
+        }
+        this.setState({});
+    }
 }
 
 export default MessageList;
