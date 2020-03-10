@@ -1,7 +1,7 @@
 import React from 'react';
-import './style.css';
+import '../style.css';
 import Thread from './Thread';
-import time from '../library/time';
+import time from '../../library/time';
 
 class ThreadList extends React.Component {
 

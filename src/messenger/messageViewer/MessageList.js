@@ -1,8 +1,10 @@
 import React from 'react';
-import './style.css';
+
+import time from '../../library/time';
+
+import '../style.css';
 import ReceivedMessage from './ReceivedMessage';
 import SentMessage from './SentMessage';
-import time from '../library/time';
 
 class MessageList extends React.Component {
 

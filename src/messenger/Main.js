@@ -1,13 +1,14 @@
 import React from 'react';
 import { IoIosCopy } from "react-icons/io";
 
-import './style.css';
-import ThreadList from './ThreadList';
-import MessageListHeader from './MessageListHeader';
-import MessageList from './MessageList';
 import requester from '../library/requester';
 import eventManager from '../library/eventManager';
-import MessageSender from './MessageSender';
+
+import './style.css';
+import ThreadList from './threadLister/ThreadList';
+import MessageListHeader from './messageViewer/MessageListHeader';
+import MessageList from './messageViewer/MessageList';
+import MessageSender from './messageViewer/MessageSender';
 
 class Main extends React.Component {
     constructor(props) {

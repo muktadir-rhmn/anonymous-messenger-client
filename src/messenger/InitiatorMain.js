@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import './style.css';
 import requester from '../library/requester';
 import eventManager from '../library/eventManager';
-import MessageList from './MessageList';
-import MessageSender from './MessageSender';
+
+import './style.css';
+import MessageList from './messageViewer/MessageList';
+import MessageSender from './messageViewer/MessageSender';
 
 function InitiatorMain (props){
     let {threadID} = useParams();

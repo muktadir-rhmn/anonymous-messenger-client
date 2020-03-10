@@ -1,8 +1,8 @@
 import React from 'react';
 
-import requester from '../library/requester';
+import requester from '../../library/requester';
 
-import './style.css';
+import '../style.css';
 
 class MessageSender extends React.Component {
     constructor(props) {
