@@ -29,8 +29,6 @@ class MessageList extends React.Component {
         return (
             <div id="messageList" >
                 {messagesUIs}
-                <ReceivedMessage text="first Message" sentAt="5pm"/>
-                <SentMessage text="first Message" seenAt="5pm"/>
             </div>
         );
     }
@@ -52,20 +50,27 @@ class MessageList extends React.Component {
     }
 
     getMessageUI(message){
-        let messageUI;
+        
+        let messageType;
         const SIGNED_IN_USER = 0;
         const INITIATOR = 1;
+        const MESSAGE_TYPE_SENT = 0;
+        const MESSAGE_TYPE_RECEIVED = 1;
         if(this.props.messageListType === "SIGNED_IN_USER"){
-            if(message.sender === SIGNED_IN_USER) messageUI = <SentMessage id={message.id} text={message.text} sentAt={message.seenAt} />
-            else if(message.sender === INITIATOR) messageUI = <ReceivedMessage id={message.id} text={message.text} seenAt={message.sentAt} />
+            if(message.sender === SIGNED_IN_USER) messageType = MESSAGE_TYPE_SENT;
+            else if(message.sender === INITIATOR) messageType = MESSAGE_TYPE_RECEIVED
             else console.error("wrong sender", message);
         } else if(this.props.messageListType === "INITIATOR"){
-            if(message.sender === SIGNED_IN_USER) messageUI = <ReceivedMessage id={message.id} text={message.text} sentAt={message.seenAt} />
-            else if(message.sender === INITIATOR) messageUI = <SentMessage id={message.id} text={message.text} seenAt={message.sentAt} />
+            if(message.sender === SIGNED_IN_USER) messageType = MESSAGE_TYPE_RECEIVED 
+            else if(message.sender === INITIATOR) messageType = MESSAGE_TYPE_SENT;
             else console.error("wrong sender", message);
         } else {
             console.error("Wrong messageListType attribute:", this.props.messageListType)
         }
+
+        let messageUI;
+        if(messageType === MESSAGE_TYPE_SENT) messageUI = <SentMessage key={message.id} id={message.id} status={message.status} text={message.text} seenAt={message.seenAt} sentAt={message.sentAt}/>
+        else if(messageType == MESSAGE_TYPE_RECEIVED) messageUI = <ReceivedMessage key={message.id} id={message.id} status={message.status} text={message.text} sentAt={message.seenAt} />
         return messageUI;
     }
 

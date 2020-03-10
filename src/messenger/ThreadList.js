@@ -33,7 +33,6 @@ class ThreadList extends React.Component {
         return (
             <div id="thread-list" className="list-group">
                 {threadUIs}
-                <Thread threadID="2" title="Muktadir" lastMsg="bye" lastActive="2 days ago"/>
             </div>
         );
     }
