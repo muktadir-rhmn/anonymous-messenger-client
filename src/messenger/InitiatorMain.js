@@ -11,7 +11,7 @@ import MessageSender from './messageViewer/MessageSender';
 function InitiatorMain (props){
     let {threadID} = useParams();
     return (
-        <InitiatorMainHelper threadID={threadID}/>
+        <InitiatorMainHelper/>
     );
 }
 
@@ -24,11 +24,11 @@ class InitiatorMainHelper extends React.Component {
         this.handleNewMessage = this.handleNewMessage.bind(this);
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
 
-        const threadID = window.localStorage.getItem("threadID");
-        if(threadID == null) this.isSignedIn = false;
+        this.threadID = window.localStorage.getItem("threadID");
+        if(this.threadID == null) this.isSignedIn = false;
         else this.isSignedIn = true;
 
-        const path = `/threads/${threadID}`;
+        const path = `/threads/${this.threadID}`;
         requester.GET(path, {}).then(
             (response) =>  {
                 if(response.messages.length > 0){
@@ -48,8 +48,8 @@ class InitiatorMainHelper extends React.Component {
         return (
             <div id="initiator-main" >
                 <div className="vh-100">
-                    <MessageList threadID={this.props.threadID} messages={this.state.messages} messageListType="INITIATOR"/>
-                    <MessageSender currentThreadID={this.props.threadID} />
+                    <MessageList threadID={this.threadID} messages={this.state.messages} messageListType="INITIATOR"/>
+                    <MessageSender currentThreadID={this.threadID} />
                 </div>
             </div>
         )
