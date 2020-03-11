@@ -9,15 +9,26 @@ import ThreadList from './threadLister/ThreadList';
 import MessageListHeader from './messageViewer/MessageListHeader';
 import MessageList from './messageViewer/MessageList';
 import MessageSender from './messageViewer/MessageSender';
+import { Link } from 'react-router-dom';
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {currentThreadID: null, currentThreadName: "", messages: [], threads: []};
+
+        //currentThread = the thread shown in the messageViewer
+        this.state = {
+            currentThreadID: null, 
+            currentThreadName: "", 
+            messages: [], 
+            threads: [],
+        };
 
         this.userName = window.localStorage.getItem("userName");
         this.userID = window.localStorage.getItem("userID");
         this.initiationURL = `http://localhost:3000.com/initiate/${this.userID}`;
+
+        if(this.userName == null) this.isSignedIn = false;
+        else this.isSignedIn = true;
 
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
@@ -38,6 +49,7 @@ class Main extends React.Component {
     }
 
     render() {
+        if(!this.isSignedIn) return <h1>Please <Link to="/signin">Sign in</Link></h1>
         return (
             <div id="messenger-main" className="row">
                 <div className="col-md-3">
