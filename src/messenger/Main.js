@@ -50,6 +50,7 @@ class Main extends React.Component {
 
     render() {
         if(!this.isSignedIn) return <h1>Please <Link to="/signin">Sign in</Link></h1>
+
         return (
             <div id="messenger-main" className="row">
                 <div className="col-md-3">
@@ -68,6 +69,10 @@ class Main extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    componentDidMount() {
+        if(this.isSignedIn) eventManager.startPulling();
     }
 
     fetchMessages(threadID, threadName) {

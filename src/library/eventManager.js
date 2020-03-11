@@ -72,17 +72,8 @@ class EventManager {
 
     setLastMessageID(id) {
         console.log("Setting last message id:", id);
-        let isFirstTime = false;
-        if(this.lastMessageID === null) isFirstTime = true;
 
         this.lastMessageID = id;
-
-        const path = window.location.pathname;
-        if(isFirstTime){//start pulling
-            if(path === "/" || path.indexOf("/initiator-message/") !== -1) {
-                pullManager.pull(); 
-            }
-        }
     }
 
     /**
@@ -102,6 +93,16 @@ class EventManager {
         for(let i = 0; i < handlers.length; i++) {
             handlers[i](event.data);
         }
+    }
+
+    startPulling() {
+        const path = window.location.pathname;
+        pullManager.pull(); 
+        // if(isFirstTime){//start pulling
+        //     if(path === "/" || path.indexOf("/initiator-message/") !== -1) {
+        //         pullManager.pull(); 
+        //     }
+        // }
     }
 }
 

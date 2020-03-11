@@ -30,6 +30,7 @@ class Signin extends React.Component {
             (response) => {
                 window.localStorage.setItem("token", response.token);
                 window.localStorage.setItem("initiatorName", response.initiatorName);
+                window.localStorage.setItem("threadID", response.threadID);
                 alert(response.message); 
             },
             (data) => {alert(data.message);}
