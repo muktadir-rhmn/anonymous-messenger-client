@@ -30,9 +30,14 @@ class Signup extends React.Component {
     handleSignup() {
         const data = formDataCollector.collect("signupForm");
         requester.POST("/signup", data).then(
-            (data) => {console.log(data); alert("Signup successful");}
-        ).catch(
-            (data) => {console.log(data); alert("Failed to signup");}
+            (response) => {
+                console.log(response); 
+                alert("Signup successful");
+            },
+            (error) => {
+                console.error(error); 
+                alert("Failed to signup");
+            }
         )
     }
 }

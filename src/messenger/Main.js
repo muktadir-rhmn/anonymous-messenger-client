@@ -17,9 +17,11 @@ class Main extends React.Component {
 
         //currentThread = the thread shown in the messageViewer
         this.state = {
-            currentThreadID: null, 
-            currentThreadName: "", 
-            messages: [], 
+            currentThread: {
+                id: null,
+                name: "",
+                messages: [],
+            },
             threads: [],
         };
 
@@ -43,7 +45,7 @@ class Main extends React.Component {
                 })
             },
             (error) => {
-                console.error("Error");
+                console.error("Error fetching thread list");
             }
         )
     }
@@ -57,14 +59,14 @@ class Main extends React.Component {
                     <div className="vh-100">
                         <h1>{this.userName}</h1>
                         <p id="newThreadURL"> <a href={this.initiationURL}>{this.initiationURL}</a> <IoIosCopy/></p>
-                        <ThreadList currentThreadID={this.state.currentThreadID} threads={this.state.threads} loadThreadIntoMessageViewer={this.loadThreadIntoMessageViewer}/>
+                        <ThreadList currentThreadID={this.state.currentThread.id} threads={this.state.threads} loadThreadIntoMessageViewer={this.loadThreadIntoMessageViewer}/>
                     </div>
                 </div>
                 <div className="col-md-8">
                     <div className="vh-100">
-                        <MessageListHeader threadName={this.state.currentThreadName}/>
-                        <MessageList threadID={this.state.currentThreadID} messages={this.state.messages} messageListType="SIGNED_IN_USER"/>
-                        <MessageSender currentThreadID={this.state.currentThreadID} />
+                        <MessageListHeader threadName={this.state.currentThread.name}/>
+                        <MessageList threadID={this.state.currentThread.id} messages={this.state.currentThread.messages} messageListType="SIGNED_IN_USER"/>
+                        <MessageSender currentThreadID={this.state.currentThread.id} />
                     </div>
                 </div>
             </div>
@@ -86,9 +88,11 @@ class Main extends React.Component {
                     eventManager.setLastMessageID(response.messages[response.messages.length - 1].id);
                 }
                 this.setState({
-                    currentThreadID: threadID, 
-                    currentThreadName: threadName,
-                    messages: response.messages
+                    currentThread: {
+                        id: threadID,
+                        name: threadName,
+                        messages: response.messages,
+                    },
                 });
             }, 
             (error) => {
@@ -106,8 +110,8 @@ class Main extends React.Component {
         console.log("new messages:", messages);
         if(messages.length > 0) eventManager.setLastMessageID(messages[messages.length - 1].id);
         for(let i = 0; i < messages.length; i++) {
-            if(messages[i].threadID !== this.state.currentThreadID) continue;
-            this.state.messages.push(messages[i]);
+            if(messages[i].threadID !== this.state.currentThread.id) continue;
+            this.state.currentThread.messages.push(messages[i]);
         }
         this.setState({});
     }
