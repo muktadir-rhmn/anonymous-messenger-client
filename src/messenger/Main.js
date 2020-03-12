@@ -25,7 +25,7 @@ class Main extends React.Component {
 
         this.userName = window.localStorage.getItem("userName");
         this.userID = window.localStorage.getItem("userID");
-        this.initiationURL = `http://localhost:3000.com/initiate/${this.userID}`;
+        this.initiationURL = `http://localhost.com:3000/initiate/${this.userID}`;
 
         if(this.userName == null) this.isSignedIn = false;
         else this.isSignedIn = true;

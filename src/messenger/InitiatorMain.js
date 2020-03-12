@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import requester from '../library/requester';
 import eventManager from '../library/eventManager';
@@ -8,18 +8,13 @@ import './style.css';
 import MessageList from './messageViewer/MessageList';
 import MessageSender from './messageViewer/MessageSender';
 
-function InitiatorMain (props){
-    let {threadID} = useParams();
-    return (
-        <InitiatorMainHelper/>
-    );
-}
-
-class InitiatorMainHelper extends React.Component {
+class InitiatorMain extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {messages : []};
+        this.state = {
+            messages: [],
+        };
 
         this.handleNewMessage = this.handleNewMessage.bind(this);
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
