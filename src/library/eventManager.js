@@ -98,11 +98,6 @@ class EventManager {
     startPulling() {
         const path = window.location.pathname;
         pullManager.pull(); 
-        // if(isFirstTime){//start pulling
-        //     if(path === "/" || path.indexOf("/initiator-message/") !== -1) {
-        //         pullManager.pull(); 
-        //     }
-        // }
     }
 }
 
