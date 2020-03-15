@@ -38,6 +38,7 @@ class Main extends React.Component {
 
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
+        this.handleMessageSeen = this.handleMessageSeen.bind(this);
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
         eventManager.addEventListener(eventManager.eventTypes.MESSAGE_SEEN, this.handleMessageSeen);
 
@@ -92,7 +93,7 @@ class Main extends React.Component {
                     const lastMessage = response.messages[response.messages.length - 1];
                     eventManager.setLastMessageID(lastMessage.id);
 
-                    if(this.isReceivedAndUnseen(message)) this.markAsSeen(threadID, lastMessage);
+                    if(this.isReceivedAndUnseen(lastMessage)) this.markAsSeen(threadID, lastMessage.id);
                     if(this.isSignedIn) eventManager.startPulling();
                 }
                 this.setState({
@@ -109,8 +110,8 @@ class Main extends React.Component {
         )
     }
 
-    markAsSeen(threadID, message){
-        const seeMessagePath = `/threads/${threadID}/messages/${message.id}/see-message`;
+    markAsSeen(threadID, messageID){
+        const seeMessagePath = `/threads/${threadID}/messages/${messageID}/see-message`;
         requester.POST(seeMessagePath, {});
     }
 
@@ -118,7 +119,7 @@ class Main extends React.Component {
         const SIGNED_IN_USER = 0;
         const INITIATOR = 1;
         if(message.sender === INITIATOR) {
-            if(message.status === "seen") return true;
+            if(message.status === "unseen") return true;
             else return false;
         } else {
             return false;
@@ -132,10 +133,10 @@ class Main extends React.Component {
     handleNewMessage(eventData) {
         const messages = eventData.messages;
         console.log("new messages:", messages);
-        
+
         const lastMessage = messages[messages.length - 1];
         if(messages.length > 0) eventManager.setLastMessageID(lastMessage.id);
-        if(this.isReceivedAndUnseen(lastMessage)) this.markAsSeen(this.state.currentThread.id, lastMessage);
+        if(this.isReceivedAndUnseen(lastMessage)) this.markAsSeen(this.state.currentThread.id, lastMessage.id);
 
         for(let i = 0; i < messages.length; i++) {
             if(messages[i].threadID !== this.state.currentThread.id) continue;
@@ -145,7 +146,19 @@ class Main extends React.Component {
     }
 
     handleMessageSeen(eventData) {
+        if(this.state.currentThread.id !== eventData.threadID) return;
+        const lastMessageID = eventData.lastMessageID;
 
+        const currentMessages = this.state.currentThread.messages;
+        for(let i = currentMessages.length - 1; i >= 0; i--) {
+            if(currentMessages[i].status === "seen") break;
+            if(currentMessages[i].id <= lastMessageID) {
+                currentMessages[i].status = "seen";
+                currentMessages[i].seenAt = eventData.seenAt;
+            }
+        }
+
+        this.setState({});
     }
 }
 
