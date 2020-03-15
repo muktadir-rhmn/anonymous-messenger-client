@@ -39,6 +39,7 @@ class Main extends React.Component {
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
+        eventManager.addEventListener(eventManager.eventTypes.MESSAGE_SEEN, this.handleMessageSeen);
 
         requester.GET("/threads").then(
             (response) => {
@@ -118,6 +119,10 @@ class Main extends React.Component {
             this.state.currentThread.messages.push(messages[i]);
         }
         this.setState({});
+    }
+
+    handleMessageSeen(eventData) {
+        
     }
 }
 

@@ -20,6 +20,12 @@ class PullManager {
                         lastMessageID: this.eventManager.lastMessageID,
                     }
                 },
+                {
+                    eventType: this.eventManager.eventTypes.MESSAGE_SEEN,
+                    data: {
+                        
+                    }
+                }
             ]
         }
         this.sendRequestAndPullAgain(data);
@@ -54,12 +60,15 @@ class PullManager {
 
 class EventManager {
     constructor() {
-        this.eventListeners = {
-            0: [],
-        };
-
+        
         this.eventTypes = {
             NEW_MESSAGE: 0,
+            MESSAGE_SEEN: 1,
+        }
+
+        this.eventListeners = {};
+        for(let eventType in this.eventTypes) {
+            this.eventListeners[eventType] = [];
         }
 
         this.lastEventTime = new Date().valueOf();
