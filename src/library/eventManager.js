@@ -67,7 +67,8 @@ class EventManager {
         }
 
         this.eventListeners = {};
-        for(let eventType in this.eventTypes) {
+        for(let eventName in this.eventTypes) {
+            const eventType = this.eventTypes[eventName];
             this.eventListeners[eventType] = [];
         }
 
