@@ -29,8 +29,12 @@ class Main extends React.Component {
         this.userID = window.localStorage.getItem("userID");
         this.initiationURL = `http://localhost.com:3000/initiate/${this.userID}`;
 
-        if(this.userName == null) this.isSignedIn = false;
-        else this.isSignedIn = true;
+        if(this.userName == null) {
+            this.isSignedIn = false;
+            return;
+        } else {
+            this.isSignedIn = true;
+        }
 
         this.loadThreadIntoMessageViewer = this.loadThreadIntoMessageViewer.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
@@ -74,7 +78,6 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        if(this.isSignedIn) eventManager.startPulling();
     }
 
     fetchMessages(threadID, threadName) {
@@ -86,6 +89,7 @@ class Main extends React.Component {
             (response) =>  {
                 if(response.messages.length > 0){
                     eventManager.setLastMessageID(response.messages[response.messages.length - 1].id);
+                    if(this.isSignedIn) eventManager.startPulling();
                 }
                 this.setState({
                     currentThread: {

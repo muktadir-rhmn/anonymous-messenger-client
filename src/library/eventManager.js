@@ -64,6 +64,7 @@ class EventManager {
 
         this.lastEventTime = new Date().valueOf();
         this.lastMessageID = null;
+        this.isPulling = false;
     }
 
     setPullManager(pullManager){
@@ -96,8 +97,9 @@ class EventManager {
     }
 
     startPulling() {
-        const path = window.location.pathname;
+        if(this.isPulling) return;
         pullManager.pull(); 
+        this.isPulling = true;
     }
 }
 

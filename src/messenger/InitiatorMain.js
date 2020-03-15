@@ -28,6 +28,7 @@ class InitiatorMain extends React.Component {
             (response) =>  {
                 if(response.messages.length > 0){
                     eventManager.setLastMessageID(response.messages[response.messages.length - 1].id);
+                    if(this.isSignedIn) eventManager.startPulling();
                 }
                 this.setState({
                     messages: response.messages
@@ -51,18 +52,20 @@ class InitiatorMain extends React.Component {
     }
 
     componentDidMount() {
-        if(this.isSignedIn) eventManager.startPulling();
+        
     }
 
     handleNewMessage(eventData) {
         const messages = eventData.messages;
         console.log("new messages:", messages);
         if(messages.length > 0) eventManager.setLastMessageID(messages[messages.length - 1].id);
-        const currentThreadID = parseInt(this.props.threadID);
+        const currentThreadID = parseInt(this.threadID);
         for(let i = 0; i < messages.length; i++) {
+            console.log(messages[i].threadID, currentThreadID)
             if(messages[i].threadID !== currentThreadID) continue;
             this.state.messages.push(messages[i]);
         }
+        console.log("initiator state", this.state);
         this.setState({});
     }
 }

@@ -8,7 +8,7 @@ class ReceivedMessage extends React.Component {
                 <div className="message-body">
                     {this.props.text}
                 </div>
-                <small>Sent At <b>{this.props.sentAt}</b></small>
+                <small>Sent at <b>{this.props.sentAt}</b></small>
             </div>
         );
     }
