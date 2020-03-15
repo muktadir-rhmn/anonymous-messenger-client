@@ -72,7 +72,7 @@ class Main extends React.Component {
                     <div className="vh-100">
                         <MessageListHeader threadName={this.state.currentThread.name}/>
                         <MessageList threadID={this.state.currentThread.id} messages={this.state.currentThread.messages} messageListType="SIGNED_IN_USER"/>
-                        <MessageSender currentThreadID={this.state.currentThread.id} />
+                        <MessageSender currentThreadID={this.state.currentThread.id} userType="SIGNED_IN"/>
                     </div>
                 </div>
             </div>

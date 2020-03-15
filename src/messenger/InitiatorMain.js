@@ -51,7 +51,7 @@ class InitiatorMain extends React.Component {
             <div id="initiator-main" >
                 <div className="vh-100">
                     <MessageList threadID={this.threadID} messages={this.state.messages} messageListType="INITIATOR"/>
-                    <MessageSender currentThreadID={this.threadID} />
+                    <MessageSender currentThreadID={this.threadID} userType="INITIATOR"/>
                 </div>
             </div>
         )

@@ -25,6 +25,12 @@ class PullManager {
                     data: {
                         
                     }
+                },
+                {
+                    eventType: this.eventManager.eventTypes.TYPING,
+                    data: {
+                        
+                    }
                 }
             ]
         }
@@ -64,6 +70,7 @@ class EventManager {
         this.eventTypes = {
             NEW_MESSAGE: 0,
             MESSAGE_SEEN: 1,
+            TYPING: 2,
         }
 
         this.eventListeners = {};
