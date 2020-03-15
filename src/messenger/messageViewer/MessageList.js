@@ -33,10 +33,10 @@ class MessageList extends React.Component {
         const MESSAGE_TYPE_RECEIVED = 1;
         if(this.props.messageListType === "SIGNED_IN_USER"){
             if(message.sender === SIGNED_IN_USER) messageType = MESSAGE_TYPE_SENT;
-            else if(message.sender === INITIATOR) messageType = MESSAGE_TYPE_RECEIVED
+            else if(message.sender === INITIATOR) messageType = MESSAGE_TYPE_RECEIVED;
             else console.error("wrong sender", message);
         } else if(this.props.messageListType === "INITIATOR"){
-            if(message.sender === SIGNED_IN_USER) messageType = MESSAGE_TYPE_RECEIVED 
+            if(message.sender === SIGNED_IN_USER) messageType = MESSAGE_TYPE_RECEIVED;
             else if(message.sender === INITIATOR) messageType = MESSAGE_TYPE_SENT;
             else console.error("wrong sender", message);
         } else {
