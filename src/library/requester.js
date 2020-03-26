@@ -5,7 +5,7 @@ const RESPONSE_CODE = {
     VALIDATION_ERROR: 400,
 }
 const requester = {
-    GET: function(path, queryParams={},) {
+    GET: function(path, queryParams={}) {
         let queryString = "";
         for(let key in queryParams) {
             if(queryString !== "") queryString += "&";
@@ -26,12 +26,12 @@ const requester = {
                 }
             }
             xhr.open("GET", url, true);
-            xhr.setRequestHeader("token", window.localStorage.getItem("token"));
+            xhr.setRequestHeader("token", window.sessionStorage.getItem("token"));
             xhr.send();
         }) 
         return promise;
     }, 
-    POST: function(path, requestBody={}, callback) {
+    POST: function(path, requestBody={}) {
         const url = `${rootURL}${path}`;
 
         let promise = new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ const requester = {
             }
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("token", window.localStorage.getItem("token"));
+            xhr.setRequestHeader("token", window.sessionStorage.getItem("token"));
             xhr.send(JSON.stringify(requestBody));
         });
         return promise;

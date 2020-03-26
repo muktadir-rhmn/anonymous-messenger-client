@@ -14,6 +14,7 @@ class Signin extends React.Component {
         this.handleSignin = this.handleSignin.bind(this);
     }
     render() {
+        
         return (
             <div id="initiatorSigninForm" className="box shadow p-3 mb-5 bg-white rounded w-25">
                 <h1>Initiator Signin</h1>
@@ -28,10 +29,14 @@ class Signin extends React.Component {
         const data =  formDataCollector.collect("initiatorSigninForm");
         requester.POST("/initiator/signin", data).then(
             (response) => {
-                window.localStorage.setItem("token", response.token);
-                window.localStorage.setItem("initiatorName", response.initiatorName);
-                window.localStorage.setItem("threadID", response.threadID);
+                // window.localStorage.setItem("token", response.token);
+                // window.localStorage.setItem("initiatorName", response.initiatorName);
+                // window.localStorage.setItem("threadID", response.threadID);
+                window.sessionStorage.setItem("token", response.token);
+                window.sessionStorage.setItem("initiatorName", response.initiatorName);
+                window.sessionStorage.setItem("threadID", response.threadID);
                 alert(response.message); 
+                window.location.href = `/initiator-message/${response.threadID}`;
             },
             (data) => {alert(data.message);}
         )

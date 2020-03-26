@@ -21,7 +21,7 @@ class InitiatorMain extends React.Component {
         eventManager.addEventListener(eventManager.eventTypes.NEW_MESSAGE, this.handleNewMessage);
         eventManager.addEventListener(eventManager.eventTypes.MESSAGE_SEEN, this.handleMessageSeen);
 
-        this.threadID = window.localStorage.getItem("threadID");
+        this.threadID = window.sessionStorage.getItem("threadID");
         if(this.threadID == null) this.isSignedIn = false;
         else this.isSignedIn = true;
         this.threadID = parseInt(this.threadID);

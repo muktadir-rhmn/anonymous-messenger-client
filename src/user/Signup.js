@@ -15,6 +15,11 @@ class Signup extends React.Component {
         this.handleSignup = this.handleSignup.bind(this);
     }
     render() {
+        if(window.localStorage.getItem("token") !== null) {
+            window.location.href = "/";
+            return;
+        }
+
         return (
             <div id="signupForm" className="box shadow p-3 mb-5 bg-white rounded w-25">
                 <h1>Signup</h1>
@@ -33,6 +38,7 @@ class Signup extends React.Component {
             (response) => {
                 console.log(response); 
                 alert("Signup successful");
+                window.location.href = "/signin";
             },
             (error) => {
                 console.error(error); 

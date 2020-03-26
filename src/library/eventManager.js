@@ -1,3 +1,4 @@
+import requester from "./requester";
 
 const pullURL = "http://localhost:8080/listen";
 
@@ -38,22 +39,16 @@ class PullManager {
     }
 
     sendRequestAndPullAgain(data) {
-        this.xhr = new XMLHttpRequest();
-        this.xhr.onreadystatechange = () => {
-            if(this.xhr.readyState === XMLHttpRequest.DONE) {
-                const response = JSON.parse(this.xhr.responseText);
-                if(this.xhr.status === 200) {
-                    this.handleEvents(response.events);
-                } else {
-                    console.error("Error while pulling", response)
-                }
-                setTimeout(() => this.pull(), 100); //pull again after a while
+        requester.POST(this.pullURL, data).then(
+            (response) => {
+                this.handleEvents(response.events);
+            }, 
+            (error) => {
+                console.error("Error while pulling", error);
             }
-        }
-        this.xhr.open("POST", this.pullURL, true);
-        this.xhr.setRequestHeader("Content-Type", "application/json");
-        this.xhr.setRequestHeader("token", window.localStorage.getItem("token"));
-        this.xhr.send(JSON.stringify(data));
+        ).finally(
+            () => setTimeout(() => this.pull(), 100) //pull again
+        )
     }
 
     handleEvents(events) {

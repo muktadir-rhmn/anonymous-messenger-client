@@ -15,6 +15,11 @@ class Signin extends React.Component {
         this.handleSignin = this.handleSignin.bind(this);
     }
     render() {
+        if(window.localStorage.getItem("token") !== null) {
+            window.location.href = "/";
+            return;
+        }
+        
         return (
             <div id="signinForm" className="box shadow p-3 mb-5 bg-white rounded w-25">
                 <h1>Signin</h1>
@@ -34,6 +39,7 @@ class Signin extends React.Component {
                 window.localStorage.setItem("userID", response.userID);
                 window.localStorage.setItem("userName", response.userName);
                 alert(response.message); 
+                window.location.href = "/";
             },
             (data) => {alert(data.message);}
         )

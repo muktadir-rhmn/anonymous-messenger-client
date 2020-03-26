@@ -23,12 +23,14 @@ function ThreadInitiator (props){
     function handleCreate() {
         const data = formDataCollector.collect("initiatorForm");
         data.userID = parseInt(userID);
-        reqeuster.POST("/threads/create", data).then((response) => {
-            alert("Thread creation successful");
-        }, 
-        (response) => {
-            alert("Failed to create thread.");
-        })
+        reqeuster.POST("/threads/create", data).then(
+            (response) => {
+                alert("Thread creation successful");
+                window.location.href = `/initiator/signin`;
+            }, 
+            (response) => {
+                alert("Failed to create thread.");
+            })
     }
 }
 
