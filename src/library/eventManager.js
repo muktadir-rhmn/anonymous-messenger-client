@@ -1,6 +1,6 @@
 import requester from "./requester";
 
-const pullURL = "http://localhost:8080/listen";
+const pullURL = "/listen";
 
 class PullManager {
     constructor(pullURL) {

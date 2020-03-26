@@ -15,7 +15,7 @@ class Signin extends React.Component {
         this.handleSignin = this.handleSignin.bind(this);
     }
     render() {
-        if(window.localStorage.getItem("token") !== null) {
+        if(window.sessionStorage.getItem("token") !== null) {
             window.location.href = "/";
             return;
         }
@@ -35,9 +35,9 @@ class Signin extends React.Component {
         const data =  formDataCollector.collect("signinForm");
         requester.POST("/signin", data).then(
             (response) => {
-                window.localStorage.setItem("token", response.token);
-                window.localStorage.setItem("userID", response.userID);
-                window.localStorage.setItem("userName", response.userName);
+                window.sessionStorage.setItem("token", response.token);
+                window.sessionStorage.setItem("userID", response.userID);
+                window.sessionStorage.setItem("userName", response.userName);
                 alert(response.message); 
                 window.location.href = "/";
             },

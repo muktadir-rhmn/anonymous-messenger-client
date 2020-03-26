@@ -25,8 +25,8 @@ class Main extends React.Component {
             threads: [],
         };
 
-        this.userName = window.localStorage.getItem("userName");
-        this.userID = window.localStorage.getItem("userID");
+        this.userName = window.sessionStorage.getItem("userName");
+        this.userID = window.sessionStorage.getItem("userID");
         this.initiationURL = `http://localhost.com:3000/initiate/${this.userID}`;
 
         if(this.userName == null) {

@@ -33,6 +33,7 @@ const requester = {
     }, 
     POST: function(path, requestBody={}) {
         const url = `${rootURL}${path}`;
+        console.log(url);
 
         let promise = new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
