@@ -42,12 +42,12 @@ class PullManager {
         requester.POST(this.pullURL, data).then(
             (response) => {
                 this.handleEvents(response.events);
+                this.pull();
             }, 
             (error) => {
                 console.error("Error while pulling", error);
+                this.pull();
             }
-        ).finally(
-            () => setTimeout(() => this.pull(), 100) //pull again
         )
     }
 

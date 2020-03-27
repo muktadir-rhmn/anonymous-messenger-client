@@ -46,6 +46,8 @@ const requester = {
                     } else if(xhr.status === RESPONSE_CODE.VALIDATION_ERROR) {
                         console.log("Failed response:", json);
                         reject(json);
+                    } else {
+                        reject(json);
                     }
                 }
             }
