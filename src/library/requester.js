@@ -22,6 +22,8 @@ const requester = {
                         resolve(json);
                     } else if(xhr.status === RESPONSE_CODE.VALIDATION_ERROR) {
                         reject(json);
+                    } else {
+                        reject(json);
                     }
                 }
             }
