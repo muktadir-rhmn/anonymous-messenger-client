@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.d8500204.chunk.css",
-    "main.js": "/static/js/main.d7942117.chunk.js",
-    "main.js.map": "/static/js/main.d7942117.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.844668cf.js",
-    "runtime-main.js.map": "/static/js/runtime-main.844668cf.js.map",
-    "static/css/2.47e06e2e.chunk.css": "/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.b10617c1.chunk.js": "/static/js/2.b10617c1.chunk.js",
-    "static/js/2.b10617c1.chunk.js.map": "/static/js/2.b10617c1.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.bb51485df958c7e9658d9606db4bd807.js": "/precache-manifest.bb51485df958c7e9658d9606db4bd807.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.d8500204.chunk.css.map": "/static/css/main.d8500204.chunk.css.map",
-    "static/js/2.b10617c1.chunk.js.LICENSE.txt": "/static/js/2.b10617c1.chunk.js.LICENSE.txt"
+    "main.css": "/anonymous-messenger-client/build/static/css/main.d8500204.chunk.css",
+    "main.js": "/anonymous-messenger-client/build/static/js/main.39237f1c.chunk.js",
+    "main.js.map": "/anonymous-messenger-client/build/static/js/main.39237f1c.chunk.js.map",
+    "runtime-main.js": "/anonymous-messenger-client/build/static/js/runtime-main.dbf9fd7a.js",
+    "runtime-main.js.map": "/anonymous-messenger-client/build/static/js/runtime-main.dbf9fd7a.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/anonymous-messenger-client/build/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.b10617c1.chunk.js": "/anonymous-messenger-client/build/static/js/2.b10617c1.chunk.js",
+    "static/js/2.b10617c1.chunk.js.map": "/anonymous-messenger-client/build/static/js/2.b10617c1.chunk.js.map",
+    "index.html": "/anonymous-messenger-client/build/index.html",
+    "precache-manifest.c8c7c0c67b186dd4ea4daeae42ef4b30.js": "/anonymous-messenger-client/build/precache-manifest.c8c7c0c67b186dd4ea4daeae42ef4b30.js",
+    "service-worker.js": "/anonymous-messenger-client/build/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/anonymous-messenger-client/build/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.d8500204.chunk.css.map": "/anonymous-messenger-client/build/static/css/main.d8500204.chunk.css.map",
+    "static/js/2.b10617c1.chunk.js.LICENSE.txt": "/anonymous-messenger-client/build/static/js/2.b10617c1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.844668cf.js",
+    "static/js/runtime-main.dbf9fd7a.js",
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.b10617c1.chunk.js",
     "static/css/main.d8500204.chunk.css",
-    "static/js/main.d7942117.chunk.js"
+    "static/js/main.39237f1c.chunk.js"
   ]
 }
